@@ -1,6 +1,4 @@
-from chunking.fixed_size_chunker import FixedSizeChunker
-from chunking.sentence_chunker import SentenceChunker
-from chunking.word_chunker import WordChunker
+from chunking.sliding_window_sentence_chunker import SlidingWindowSentenceChunker
 from embedding.sentence_transformer_embedding_service import (
     SentenceTransformerEmbeddingService
 )
@@ -17,7 +15,7 @@ vector_store = VectorStore()
 
 #chunker = FixedSizeChunker(chunk_size=100)
 #chunker = WordChunker(chunk_size=10)
-chunker = SentenceChunker(chunk_size=2)
+chunker = SlidingWindowSentenceChunker(chunk_size=2, overlap_size=0)
 
 indexer = Indexer(vector_store=vector_store, embedding_service=embedding_service)
 

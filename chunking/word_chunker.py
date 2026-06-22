@@ -19,7 +19,7 @@ class WordChunker(Chunker):
             chunk_index = i // self.chunk_size
             chunks.append(
                 Chunk(
-                    chunk_id=f"{source_document.document_id}_chunk_{chunk_index}",
+                    chunk_id=f"{source_document.document_id}:{chunk_index}",
                     source_document_id=source_document.document_id,
                     chunk_index=chunk_index,
                     text=chunk_text,
