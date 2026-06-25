@@ -1,7 +1,7 @@
 from embedding.embedding_service import EmbeddingService
 from models.chunk import Chunk
 from models.indexed_chunk import IndexedChunk
-from vectordb.vector_store import VectorStore
+from vectordb.in_memory_vector_store import VectorStore
 
 
 class Indexer:
@@ -13,7 +13,6 @@ class Indexer:
     def index(self, chunks: list[Chunk]):
         for chunk in chunks:
             embedding = self.embedding_service.embed(chunk.text)
-            #print(f"Embedding for chunk {chunk.chunk_id}: {embedding}")
             indexed_chunk = IndexedChunk(chunk=chunk, embedding=embedding)
             self.vector_store.upsert(indexed_chunk)
 

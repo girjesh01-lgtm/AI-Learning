@@ -14,7 +14,7 @@ class SlidingWindowSentenceChunker(Chunker):
         if overlap_size < 0:
             raise ValueError("overlap_size must be non-negative")
         
-        if self.overlap_size >= self.chunk_size:
+        if overlap_size >= chunk_size:
             raise ValueError("overlap_size must be less than chunk_size")
         
         self.chunk_size = chunk_size
@@ -34,11 +34,13 @@ class SlidingWindowSentenceChunker(Chunker):
             return chunks
 
         step = self.chunk_size - self.overlap_size
+        chunk_counter = 0
         for i in range(0, len(sentences), step):
             window = sentences[i : i + self.chunk_size]
             chunk_text = " ".join(window)
             if len(window) < self.overlap_size:
                 break
-            chunks.append(ChunkUtils.create_chunk(source_document, i, chunk_text))
+            chunks.append(ChunkUtils.create_chunk(source_document, chunk_counter, chunk_text))
+            chunk_counter += 1
 
         return chunks

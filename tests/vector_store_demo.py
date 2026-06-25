@@ -1,7 +1,7 @@
 from embedding.sentence_transformer_embedding_service import SentenceTransformerEmbeddingService
 from retrieval.default_retriever import DefaultRetriever
 from vectordb.document import Document
-from vectordb.vector_store import VectorStore
+from vectordb.in_memory_vector_store import VectorStore
 
 store = VectorStore()
 embedding_service = SentenceTransformerEmbeddingService()

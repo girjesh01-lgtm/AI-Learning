@@ -1,6 +1,6 @@
 from embedding.embedding_service import EmbeddingService
 from retrieval.retriever import Retriever
-from vectordb.vector_store import VectorStore
+from vectordb.in_memory_vector_store import VectorStore
 
 class DefaultRetriever(Retriever):
 
