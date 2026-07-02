@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 
-from models.search_result import SearchResult
+from domain.prompt import Prompt
+from domain.search_result import SearchResult
 
 
 class PromptBuilder(ABC):
     @abstractmethod
-    def build_prompt(self, query: str, search_results: list[SearchResult]) -> str:
+    def build(self, query: str, search_results: list[SearchResult]) -> Prompt:
         """Builds a prompt string based on the provided arguments."""
         pass

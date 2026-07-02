@@ -1,6 +1,6 @@
 from chunking.chunker import Chunker
-from models.chunk import Chunk
-from models.source_document import SourceDocument
+from domain.chunk import Chunk
+from domain.source_document import SourceDocument
 
 
 class WordChunker(Chunker):

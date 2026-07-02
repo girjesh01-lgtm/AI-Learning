@@ -1,0 +1,1 @@
+from infrastructure.vector_index.faiss.faiss_vector_index import FaissVectorIndex

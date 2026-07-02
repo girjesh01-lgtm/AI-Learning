@@ -1,27 +1,60 @@
-from models.prompt import Prompt
-from models.search_result import SearchResult
+from domain.prompt import Prompt
+from domain.search_result import SearchResult
 from prompting.prompt_builder import PromptBuilder
 
 
 class DefaultPromptBuilder(PromptBuilder):
 
-    def build_prompt(self, query: str, search_results: list[SearchResult]) -> Prompt:
+    def build(self, query: str, search_results: list[SearchResult]) -> Prompt:
 
         """Builds a prompt string based on the provided arguments."""
 
-        context = []
-        
-        for result in search_results:
-            context.append(result.indexed_chunk.chunk.text)
-        
-        context_text = "\n\n".join(context)
-        
-        
-        prompt_text = f"""you are a helpful assistant. 
-        Answer only from the supplied context.
-        If the answer cannot be found in the context, respond with "I don't know."
-        context: {context_text}
-        Question: {query}
-        Answer:"""
+        lines = []
 
-        return Prompt(text=prompt_text.strip())
+        lines.append(
+            "You are a helpful assistant."
+        )
+
+        lines.append(
+            "Answer the question using ONLY the provided context."
+        )
+
+        lines.append(
+            "If the answer is not present, reply:"
+        )
+
+        lines.append(
+            "\"I don't know based on the provided documents.\""
+        )
+
+        lines.append("")
+        lines.append("Context:")
+        lines.append("")
+
+        for index, result in enumerate(search_results, start=1):
+
+            lines.append(
+                f"Chunk {index}:"
+            )
+
+            lines.append(
+                result.chunk.text
+            )
+
+            lines.append("")
+
+
+        lines.append(
+        "Question:"
+        )
+
+        lines.append(
+            query
+        )
+
+        lines.append("")
+        lines.append("Answer:")
+
+        return Prompt(
+            text="\n".join(lines)
+        )

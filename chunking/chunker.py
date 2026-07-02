@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from models.chunk import Chunk
-from models.source_document import SourceDocument
+from domain.chunk import Chunk
+from domain.source_document import SourceDocument
 
 
 class Chunker(ABC):
